@@ -19,20 +19,14 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(express.static(path.join(__dirname, "/public")));
 
-// app.get("/", (req, res) => {
-//     res.send({
-//       message: "Hello World",
-//     });
-//   });
-
-//   app.get("/api", (req, res) => {
-//     res.send({
-//       message: "api mounted here",
-//     });
-//   });
+  app.get("/api", (req, res) => {
+    res.send({
+      message: "api mounted here",
+    });
+  });
 
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/index.html")); // --> for every request made by the client, send 'index.html' file located in 'public' directory
+    res.sendFile(path.join(__dirname, "../public/index.html")); 
   });
 
 app.use((err, req, res, next) => {
