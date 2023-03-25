@@ -1,4 +1,5 @@
+import { User } from '../../../entities/user'
 
 export interface Login {
-    execute(): Promise<boolean>
+    execute(email:String, password:String): Promise<User>
 }

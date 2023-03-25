@@ -6,7 +6,9 @@ export interface User {
     lastName: string
     getFullName(): string
     birthday: Date
-
+    isAdmin: boolean
+    token: String
+    createdAt: EpochTimeStamp
 }
 
 

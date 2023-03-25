@@ -1,4 +1,4 @@
 
 export interface Logout {
-    execute(): Promise<boolean>
+    execute(email: String, password: String): Promise<boolean>
 }

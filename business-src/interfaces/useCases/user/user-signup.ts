@@ -1,4 +1,5 @@
 
 export interface Signup {
-    execute(): Promise<boolean>
+    verifyAuth(email:String, password:String): Promise<boolean>
+    execute(email:String, password:String): Promise<boolean>
 }
