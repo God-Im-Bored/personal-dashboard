@@ -1,4 +1,4 @@
-import express, { Request, Response, Error, Next } from "express"
+import express, { Request, Response, NextFunction} from "express"
 const cors = require("cors")
 const path = require("path");
 const app = express()
@@ -16,6 +16,8 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(express.static(path.join(__dirname, "/public")));
 
+app.use('/auth', require('./adapters-src/routers'))
+
   app.get("/api", (req: Request, res: Response) => {
     res.send({
       message: "api mounted here",
@@ -26,13 +28,12 @@ app.use(express.static(path.join(__dirname, "/public")));
     res.sendFile(path.join(__dirname, "../public/index.html")); 
   });
 
-app.use((err: Error, req: Request, res: Response, next: Next) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     console.error(err)
     console.error(err.stack)
     res.status(err.status || 500 ).send(err.message || "Internal server error. Check application entry point.")
 })
 
-app.listen(PORT, (err: Error) => {
-    if (err) console.log(err.message)
-    console.log(`server listening on newtowrk connection http://localhost:${PORT}`)
+app.listen(PORT, () => {
+  console.log(`server listening on network connection http://localhost:${PORT}`)
 })

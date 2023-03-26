@@ -1,4 +1,4 @@
-import express, { Request, Response, Error } from "express"
+import express, { Request, Response} from "express"
 import { DeleteAccount, Login, Logout, Signup } from "../../business-src/interfaces/useCases/user"
 
 export default function UserRouter(
@@ -29,23 +29,31 @@ export default function UserRouter(
         }
     })
 
-    router.get('/:id', async (req: Request, res: Response) => {
+    router.get('/login', async (req: Request, res: Response) => {
         try {
             const user = await loginUseCase.execute(req.body.email, req.body.password)
 
+            // req.session.id = user.id
             res.status(200).send(user)
-        } catch (err: Error) {
+        } catch (err) {
             res.status(500).send({ message: "Error fetching data" })
         }
     })
 
     
-    router.post('/', async (req: Request, res: Response) => {
+    router.post('/logout', async (req: Request, res: Response) => {
         try {
             await logoutUseCase.execute(req.body.email, req.body.password)
+            // req.logout() 
+            // req.session.destroy()
+            // res.sendStatus(204)
             
         } catch (err) {
             res.status(500).send({ message: "Error saving data." })
         }
     })
+
+    return router
 }
+
+module.exports = UserRouter
