@@ -2,7 +2,7 @@
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.ts",
-    "test": "jest --watchAll --collectCoverage",
+    "test": "jest --watchAll --verbose --collectCoverage",
     "lint": "eslint . --ext .ts"
   },
   "dependencies": {
