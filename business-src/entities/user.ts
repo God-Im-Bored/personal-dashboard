@@ -4,10 +4,10 @@ export interface User {
     password: string
     firstName: string
     lastName: string
-    getFullName(): string
-    birthday: Date
+    fullName: string
+    birthday: string
     isAdmin: boolean
-    createdAt: EpochTimeStamp
+    createdAt: null
 }
 
 

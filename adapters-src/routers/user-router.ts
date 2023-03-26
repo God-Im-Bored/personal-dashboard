@@ -17,21 +17,12 @@ export default function UserRouter(
   // implement a method(s) that'll create, check and delete token from sessions
 
   router.post("/signup", async (req: Request, res: Response) => {
-    if (!(await signupUseCase.verifyAuth(req.body.email, req.body.password))) {
-      res.status(400).send({
-        message: "Data entry not valid. Try again.",
-      });
-    } else {
-      return res.status(200);
-    }
-
     try {
-      console.log(req.body.email, req.body.password);
       await signupUseCase.execute(req.body.email, req.body.password);
-      res.statusCode = 201;
-      res.json({ message: "New user account created." });
+
+      res.status(201).json({ message: "New user account created." });
     } catch (err) {
-      return res.status(500).json({ message: "Error saving data." });
+      res.status(500).json({ message: "Error saving data." });
     }
   });
 
@@ -45,7 +36,7 @@ export default function UserRouter(
       // req.session.id = user.id
       res.status(200).send(user);
     } catch (err) {
-      res.status(500).send({ message: "Error fetching data" });
+      res.status(500).send({ message: "Error fetching data." });
     }
   });
 
