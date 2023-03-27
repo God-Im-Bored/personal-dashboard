@@ -1,4 +1,3 @@
-import { Sign } from "crypto";
 import request from "supertest";
 import { User } from "../../../business-src/entities";
 import { Signup } from "../../../business-src/interfaces/useCases/user/user-signup";
@@ -101,7 +100,7 @@ describe("User Router", () => {
         expect(response.status).toBe(200)
         expect(response.body).toEqual(userData)
     })
-    test("unsuccessful GET /logi returns 500 and error message for user login use-case", async () => {
+    test("unsuccessful GET /login returns 500 and error message for user login use-case", async () => {
         jest.spyOn(mockUserLoginUseCase, "execute").mockImplementation(() => Promise.reject(Error()))
 
         const response = await request(server).get("/api/login").send(userData)
